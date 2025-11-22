@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post(`https://spendsmart-backend-v1oy.onrender.com/api/auth/register`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
         username,
         email,
         password
