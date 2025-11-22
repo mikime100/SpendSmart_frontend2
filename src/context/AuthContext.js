@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // MUST END WITH /api
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
   useEffect(() => {
@@ -55,12 +56,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // FIXED: register now uses API_URL too
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+      const response = await axios.post(`${API_URL}/auth/register`, {
         username,
         email,
-        password
+        password,
       });
       const { token, user } = response.data;
       localStorage.setItem('token', token);
@@ -87,6 +89,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-
-
